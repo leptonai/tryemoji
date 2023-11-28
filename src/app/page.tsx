@@ -45,7 +45,7 @@ const supportCategories = [
   Categories.SYMBOLS,
 ];
 
-export function getRandom<T>(arr: T[]): T {
+function getRandom<T>(arr: T[]): T {
   if (arr.length === 1) {
     return arr[0];
   }
@@ -55,7 +55,7 @@ export function getRandom<T>(arr: T[]): T {
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const isSmallScreen = useMediaQuery({
-    query: "(max-width: 860px)",
+    query: "(max-width: 768px)",
   });
 
   const [image, setImage] = useState(
@@ -64,11 +64,11 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col gap-12 bg-zinc-950 items-center justify-center py-12">
       <div className="text-6xl text-zinc-100 font-serif">🐱 useEmoji</div>
-      <div className="flex items-center justify-center gap-4 flex-wrap">
-        <div className="flex-0 min-w-[300px] rounded-md">
+      <div className="flex items-center justify-center flex-col md:flex-row gap-4">
+        <div className="flex-0 w-full rounded-md">
           <EmojiPicker
-            width={isSmallScreen ? "calc(100vw - 48px)" : 300}
-            height={isSmallScreen ? 400 : 512}
+            width={"100%"}
+            height={isSmallScreen ? 300 : 512}
             searchDisabled={isSmallScreen}
             onEmojiClick={(e) => {
               setLoading(true);
@@ -130,7 +130,7 @@ export default function Home() {
             }))}
           ></EmojiPicker>
         </div>
-        <div className="flex-0">
+        <div className="flex-1">
           <div className="max-w-[100vw] h-[512px] w-[512px] rounded bg-zinc-900 relative">
             <img src={image} className="h-full w-full object-contain" />
             <div
