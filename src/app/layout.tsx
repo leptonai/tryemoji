@@ -7,7 +7,7 @@ const inter = Sriracha({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "useEmoji",
-  description: "What do emojis look like in the real world?",
+  description: "Turn emoji into amazing artwork",
 };
 const viewport: Viewport = {
   width: "device-width",
