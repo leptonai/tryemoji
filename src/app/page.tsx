@@ -117,7 +117,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-12">
       <div className="text-6xl text-zinc-100">🐱 useEmoji </div>
       <div className="text-xl text-zinc-100">
-        Turn emoji into amazing artwork
+        Turn emoji into amazing artwork via AI
       </div>
       <div className="flex items-center justify-center flex-col md:flex-row gap-4">
         <div className="flex-0 w-full md:w-80">

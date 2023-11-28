@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.1.1",
     "clsx": "^2.0.0",
     "emoji-picker-react": "^4.5.16",
     "next": "14.0.3",
