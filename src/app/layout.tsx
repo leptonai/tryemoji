@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Sriracha } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Sriracha({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "useEmoji",

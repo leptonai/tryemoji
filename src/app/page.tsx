@@ -63,7 +63,7 @@ export default function Home() {
   );
   return (
     <div className="min-h-screen flex flex-col gap-12 bg-zinc-950 items-center justify-center py-12">
-      <div className="text-6xl text-zinc-100 font-serif">🐱 useEmoji</div>
+      <div className="text-6xl text-zinc-100">🐱 useEmoji </div>
       <div className="flex items-center justify-center flex-col md:flex-row gap-4">
         <div className="flex-0 w-full rounded-md">
           <EmojiPicker
