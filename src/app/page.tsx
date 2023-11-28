@@ -92,7 +92,7 @@ export default function Home() {
           /^data:image\/(png|jpeg);base64,/,
           "",
         ),
-        prompt: `${name}, ${prompt}`,
+        prompt: `cute ${name}, ${prompt}`,
         guidance_scale: 8,
         lcm_steps: 50,
         seed: Math.floor(Math.random() * 2159232),
@@ -148,15 +148,25 @@ export default function Home() {
                 "backdrop-blur-xl": loading,
               })}
             ></div>
-            <button
-              type="button"
-              onClick={() =>
-                request(emojiRef.current.emoji, emojiRef.current.name)
-              }
-              className="absolute right-2 bottom-2 rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-            >
-              Good luck
-            </button>
+            <div className="absolute right-2 bottom-2 flex gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  request(emojiRef.current.emoji, emojiRef.current.name)
+                }
+                className=" rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+              >
+                Switch art style
+              </button>
+              <a
+                href={image}
+                download
+                type="button"
+                className="rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+              >
+                Download
+              </a>
+            </div>
           </div>
         </div>
       </div>
