@@ -17,9 +17,10 @@ import { clsx } from "clsx";
 import { EmojiStyle, Categories, Theme } from "emoji-picker-react";
 import { Check, Dice3, Download, Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useThrottledCallback } from "use-debounce";
+import { setEmojiFavicon } from "@/util/set-emoji-favicon";
 
 const EmojiPicker = dynamic(
   async () => (await import("emoji-picker-react")).default,
@@ -83,11 +84,17 @@ export default function Home() {
     [image, previousImage],
   );
 
+  useEffect(() => {
+    setEmojiFavicon(emoji.emoji);
+  }, [emoji.emoji]);
+
   return (
     <>
       <Toaster />
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-12">
-        <div className="text-6xl text-zinc-100">🐱 useEmoji </div>
+        <div className="text-6xl text-zinc-100">
+          {emoji.emoji || "🐱"} useEmoji{" "}
+        </div>
         <div className="text-xl text-zinc-100">
           Turn emoji into amazing artwork via AI
         </div>
