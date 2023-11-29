@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 
-[data-unified="1f5ff"] {
+[data-unified="1f5ff"],
+[data-unified="1f997"],
+[data-unified="1fab1"],
+[data-unified="1f95c"],
+[data-unified="1fa7b"],
+[data-unified="1fa79"] {
   display: none !important;
 }
+

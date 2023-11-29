@@ -59,6 +59,7 @@ export const useResponse = (
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
+      revalidateOnMount: false,
       refreshWhenOffline: false,
       refreshInterval: 0,
     },

@@ -9,6 +9,7 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { usePrevious } from "@/util/use-previous";
 import { useResponse } from "@/util/use-response";
+import { clsx } from "clsx";
 import { EmojiStyle, Categories, Theme } from "emoji-picker-react";
 import { Dice3, Download } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -75,11 +76,6 @@ const presets = [
       "in the style of Rembrandt, focusing on deep, rich colors and dramatic contrasts between light and shadow.",
   },
   {
-    artist: "Michelangelo",
-    prompt:
-      "in the style of Michelangelo, focusing on the human form with detailed anatomy and dramatic poses, set in a mythological context.",
-  },
-  {
     artist: "Paul Gauguin",
     prompt:
       "in the style of Paul Gauguin, with bold colors and strong outlines",
@@ -142,6 +138,11 @@ export default function Home() {
         <div className="flex-1">
           <div className="max-w-[100vw] h-[512px] w-[512px] rounded-lg overflow-hidden bg-zinc-900 relative">
             <img src={mergedImage} className="h-full w-full object-contain" />
+            <div
+              className={clsx("transition absolute inset-0", {
+                "backdrop-blur-xl": loading,
+              })}
+            ></div>
             <div className="absolute bottom-2 left-2 right-2 flex gap-2">
               <div className="text-xl text-zinc-100">AI</div>
               <Slider
