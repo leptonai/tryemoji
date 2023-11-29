@@ -9,13 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-slider": "^1.1.2",
     "@vercel/analytics": "^1.1.1",
     "clsx": "^2.0.0",
     "emoji-picker-react": "^4.5.16",
+    "lucide-react": "^0.294.0",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-responsive": "^9.0.2"
+    "react-responsive": "^9.0.2",
+    "swr": "^2.2.4",
+    "tailwind-merge": "^2.0.0",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
