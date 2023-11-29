@@ -21,6 +21,14 @@ const fallbackOptions: Option = {
   strength: 0.7,
 };
 
+export const shareString2Json = (shareString: string): Option => {
+  try {
+    return JSON.parse(decompressFromEncodedURIComponent(shareString));
+  } catch (_) {
+    return fallbackOptions;
+  }
+};
+
 export const useShare = (): { option: Option; hasShare: boolean } => {
   const searchParams = useSearchParams();
   const shareParam = searchParams.get("share");
