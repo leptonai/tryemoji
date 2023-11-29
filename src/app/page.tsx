@@ -1,4 +1,5 @@
 "use client";
+import { GithubForkRibbon } from "@/components/github";
 import {
   Select,
   SelectContent,
@@ -98,6 +99,7 @@ export default function Home() {
     <TooltipProvider delayDuration={50}>
       <Toaster />
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-12">
+        <GithubForkRibbon></GithubForkRibbon>
         <div className="text-6xl text-zinc-100">
           {emoji.emoji || "🐱"} tryEmoji{" "}
         </div>
