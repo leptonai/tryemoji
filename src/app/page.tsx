@@ -8,6 +8,12 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Toaster } from "@/components/ui/toaster";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useToast } from "@/components/ui/use-toast";
 import { presetImage, presetArtStyles } from "@/util/presets";
 import { usePrevious } from "@/util/use-previous";
@@ -89,7 +95,7 @@ export default function Home() {
   }, [emoji.emoji]);
 
   return (
-    <>
+    <TooltipProvider delayDuration={50}>
       <Toaster />
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-12">
         <div className="text-6xl text-zinc-100">
@@ -128,23 +134,39 @@ export default function Home() {
               ></div>
               <div className="absolute bottom-2 left-2 right-2 flex gap-2">
                 <div className="text-xl text-zinc-100">AI</div>
-                <Slider
-                  className="flex-1"
-                  defaultValue={[strength]}
-                  onValueChange={(v) => throttleSetStrength(v[0])}
-                  max={1}
-                  min={0.5}
-                  step={0.1}
-                />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Slider
+                      className="flex-1"
+                      defaultValue={[strength]}
+                      onValueChange={(v) => throttleSetStrength(v[0])}
+                      max={0.8}
+                      min={0.5}
+                      step={0.1}
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>AI strength</p>
+                  </TooltipContent>
+                </Tooltip>
+
                 <Select
                   value={preset.artist}
                   onValueChange={(value) =>
                     setPreset(presetArtStyles.find((p) => p.artist === value)!)
                   }
                 >
-                  <SelectTrigger className="flex-0 w-56 border-0 rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">
-                    <SelectValue placeholder="Select a fruit" />
-                  </SelectTrigger>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <SelectTrigger className="flex-0 w-56 border-0 rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">
+                        <SelectValue placeholder="Select a fruit" />
+                      </SelectTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Art style</p>
+                    </TooltipContent>
+                  </Tooltip>
+
                   <SelectContent>
                     {presetArtStyles.map((p) => (
                       <SelectItem key={p.artist} value={p.artist}>
@@ -153,48 +175,71 @@ export default function Home() {
                     ))}
                   </SelectContent>
                 </Select>
-                <button
-                  onClick={() => {
-                    setPreset(getRandom(presetArtStyles));
-                    setSeed(Math.floor(Math.random() * 2159232));
-                  }}
-                  className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-                >
-                  <Dice3></Dice3>
-                </button>
-                <a
-                  href={image}
-                  download
-                  className="flex-0 block rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-                >
-                  <Download />
-                </a>
-                <button
-                  onClick={() => {
-                    navigator.clipboard
-                      .writeText(
-                        `${location.origin}?share=${getShareUrl(shareOption)}`,
-                      )
-                      .then(() => {
-                        toast({
-                          description: (
-                            <div className="flex gap-2 text-sm items-center">
-                              <Check className="text-green-500"></Check>Copied,
-                              paste to share
-                            </div>
-                          ),
-                        });
-                      });
-                  }}
-                  className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-                >
-                  <Share2></Share2>
-                </button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => {
+                        setPreset(getRandom(presetArtStyles));
+                        setSeed(Math.floor(Math.random() * 2159232));
+                      }}
+                      className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                    >
+                      <Dice3></Dice3>
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Random</p>
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={image}
+                      download
+                      className="flex-0 block rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                    >
+                      <Download />
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Download</p>
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard
+                          .writeText(
+                            `${location.origin}?share=${getShareUrl(
+                              shareOption,
+                            )}`,
+                          )
+                          .then(() => {
+                            toast({
+                              description: (
+                                <div className="flex gap-2 text-sm items-center">
+                                  <Check className="text-green-500"></Check>
+                                  Copied, paste to share
+                                </div>
+                              ),
+                            });
+                          });
+                      }}
+                      className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                    >
+                      <Share2></Share2>
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Share</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </TooltipProvider>
   );
 }
