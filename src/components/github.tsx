@@ -6,7 +6,7 @@ export function GithubForkRibbon() {
       <div className="bg-amber-600 text-zinc-100 shadow-2xl absolute p-1 z-50 top-[35px] right-[-45px] rotate-45">
         <a
           className="w-[200px] inline-block p-1 text-center"
-          href="https://github.com/leptonai/tryemoji"
+          href="https://github.com/leptonai/tryemoji/stargazers"
           target="_blank"
         >
           Fork me on GitHub

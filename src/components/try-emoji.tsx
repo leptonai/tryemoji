@@ -26,6 +26,14 @@ import { Check, Dice3, Download, Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterShareButton,
+  XIcon,
+} from "react-share";
 import { useThrottledCallback } from "use-debounce";
 import { setEmojiFavicon } from "@/util/set-emoji-favicon";
 
@@ -95,6 +103,28 @@ export default function TryEmoji() {
     setEmojiFavicon(emoji.emoji);
   }, [emoji.emoji]);
 
+  const shareKey = useMemo(() => {
+    return getShareUrl(shareOption);
+  }, [shareOption]);
+
+  const shareUrl = useMemo(() => {
+    return `https://tryemoji.com?share=${shareKey}`;
+  }, [shareKey]);
+
+  const warmOrg: Promise<void> = useMemo(() => {
+    if (image) {
+      return fetch("/api/share", {
+        method: "POST",
+        body: JSON.stringify({
+          image: image,
+          key: shareKey,
+        }),
+      }).then();
+    } else {
+      return new Promise((resolve) => resolve());
+    }
+  }, [image, shareKey]);
+
   return (
     <TooltipProvider delayDuration={50}>
       <Toaster />
@@ -134,6 +164,46 @@ export default function TryEmoji() {
                   "backdrop-blur-xl": loading,
                 })}
               ></div>
+              <div className="absolute top-2 right-2 flex gap-2 items-center">
+                <FacebookShareButton
+                  beforeOnClick={() => warmOrg}
+                  url={shareUrl}
+                >
+                  <FacebookIcon className="rounded" size={24}></FacebookIcon>
+                </FacebookShareButton>
+                <TwitterShareButton onClick={() => warmOrg} url={shareUrl}>
+                  <XIcon className="rounded" size={24} />
+                </TwitterShareButton>
+                <LinkedinShareButton onClick={() => warmOrg} url={shareUrl}>
+                  <LinkedinIcon className="rounded" size={24} />
+                </LinkedinShareButton>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => {
+                        warmOrg.then(() => {
+                          navigator.clipboard.writeText(shareUrl).then(() => {
+                            toast({
+                              description: (
+                                <div className="flex gap-2 text-sm items-center">
+                                  <Check className="text-green-500"></Check>
+                                  Copied, paste to share
+                                </div>
+                              ),
+                            });
+                          });
+                        });
+                      }}
+                      className="flex-0 rounded bg-amber-600 w-6 flex items-center justify-center h-6 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                    >
+                      <Share2 size={16}></Share2>
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Share</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
               <div className="absolute bottom-2 left-2 right-2 flex gap-2">
                 <div className="text-xl text-zinc-100">AI</div>
                 <Tooltip>
@@ -205,43 +275,6 @@ export default function TryEmoji() {
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Download</p>
-                  </TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      onClick={() => {
-                        const share = getShareUrl(shareOption);
-                        if (image) {
-                          fetch("/api/share", {
-                            method: "POST",
-                            body: JSON.stringify({
-                              image: image,
-                              key: share,
-                            }),
-                          }).then();
-                        }
-
-                        navigator.clipboard
-                          .writeText(`${location.origin}?share=${share}`)
-                          .then(() => {
-                            toast({
-                              description: (
-                                <div className="flex gap-2 text-sm items-center">
-                                  <Check className="text-green-500"></Check>
-                                  Copied, paste to share
-                                </div>
-                              ),
-                            });
-                          });
-                      }}
-                      className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-                    >
-                      <Share2></Share2>
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Share</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
