@@ -18,6 +18,7 @@
 
 # misc
 .idea
+photon/__pycache__/
 .DS_Store
 *.pem
 
