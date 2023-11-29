@@ -99,7 +99,7 @@ export default function Home() {
       <Toaster />
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-12">
         <div className="text-6xl text-zinc-100">
-          {emoji.emoji || "🐱"} useEmoji{" "}
+          {emoji.emoji || "🐱"} tryEmoji{" "}
         </div>
         <div className="text-xl text-zinc-100">
           Turn emoji into amazing artwork via AI

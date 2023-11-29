@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 const inter = Sriracha({ weight: "400", subsets: ["latin"] });
 
-const title = "useEmoji";
+const title = "tryEmoji";
 const description = "Turn emoji into amazing artwork via AI";
 
 export const metadata: Metadata = {
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     title,
     description,
     type: "website",
-    url: "https://useemoji.com",
+    url: "https://tryemoji.com",
     images: [
       {
-        url: "https://useemoji.com/og.png",
+        url: "https://tryemoji.com/og.png",
         width: 630,
         height: 473,
-        alt: "useEmoji",
+        alt: "tryEmoji",
       },
     ],
   },
