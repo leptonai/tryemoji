@@ -6,10 +6,28 @@ import { Analytics } from "@vercel/analytics/react";
 
 const inter = Sriracha({ weight: "400", subsets: ["latin"] });
 
+const title = "useEmoji";
+const description = "Turn emoji into amazing artwork via AI";
+
 export const metadata: Metadata = {
-  title: "useEmoji",
-  description: "Turn emoji into amazing artwork via AI",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    url: "https://useemoji.com",
+    images: [
+      {
+        url: "https://useemoji.com/og.png",
+        width: 630,
+        height: 473,
+        alt: "useEmoji",
+      },
+    ],
+  },
 };
+
 const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
