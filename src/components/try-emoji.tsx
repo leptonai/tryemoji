@@ -22,9 +22,19 @@ import { useResponse } from "@/util/use-response";
 import { getShareUrl, Option, useShare } from "@/util/use-share";
 import { clsx } from "clsx";
 import { EmojiStyle, Categories, Theme } from "emoji-picker-react";
-import { Check, Dice3, Download, Share2 } from "lucide-react";
+import {
+  Check,
+  Dice1,
+  Dice2,
+  Dice3,
+  Dice4,
+  Dice5,
+  Dice6,
+  Download,
+  Share2,
+} from "lucide-react";
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import {
   FacebookIcon,
@@ -58,6 +68,48 @@ function getRandom<T>(arr: T[]): T {
   }
   return arr[Math.floor(Math.random() * arr.length)];
 }
+
+const dices = [
+  <Dice1 key="dice-1" />,
+  <Dice2 key="dice-2" />,
+  <Dice3 key="dice-3" />,
+  <Dice4 key="dice-4" />,
+  <Dice5 key="dice-5" />,
+  <Dice6 key="dice-6" />,
+];
+
+const RollableDice: FC = () => {
+  const [click, setClick] = useState(false);
+  const [currentNumber, setCurrentNumber] = useState(3);
+  const rollDice = () => {
+    let rollingTime = 0;
+    setClick(true);
+
+    const rollInterval = setInterval(
+      () => {
+        setCurrentNumber(Math.floor(Math.random() * 6));
+        rollingTime += 100;
+        // Slow down the rolling
+        if (rollingTime >= 1200) {
+          clearInterval(rollInterval);
+          setClick(false);
+        }
+      },
+      100 - rollingTime / 20,
+    );
+  };
+  return (
+    <div
+      className={click ? "animate-[shake_1.2s_ease-in-out]" : ""}
+      onClick={(event) => {
+        event.preventDefault();
+        rollDice();
+      }}
+    >
+      {dices[currentNumber]}
+    </div>
+  );
+};
 
 export default function TryEmoji() {
   const { option: presetOption, hasShare } = useShare();
@@ -256,7 +308,7 @@ export default function TryEmoji() {
                       }}
                       className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
                     >
-                      <Dice3></Dice3>
+                      <RollableDice></RollableDice>
                     </button>
                   </TooltipTrigger>
                   <TooltipContent>
