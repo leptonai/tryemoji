@@ -57,22 +57,22 @@ export async function GET(request: Request) {
             objectFit: "cover",
             objectPosition: "center",
           }}
-          width="1024"
-          height="768"
+          width="800"
+          height="471"
           src={image as unknown as string}
         />
         {emoji && (
           <span
             style={{
-              width: 40,
-              height: 40,
+              width: 45,
+              height: 45,
               textAlign: "center",
               lineHeight: "40px",
               background: "#0a0a0b",
               position: "absolute",
-              top: 30,
-              left: 220,
-              fontSize: 36,
+              top: 38,
+              left: 305,
+              fontSize: 40,
               fontFamily: "sans-serif",
             }}
           >
@@ -82,15 +82,15 @@ export async function GET(request: Request) {
         {base64URL && (
           <img
             src={base64URL}
-            width="512"
-            height="512"
+            width="302"
+            height="302"
             style={{
               position: "absolute",
-              borderRadius: 2,
-              top: 121,
-              right: 54,
-              width: 315,
-              height: 315,
+              borderRadius: 8,
+              top: 125,
+              right: 150,
+              width: 302,
+              height: 302,
               objectFit: "cover",
               objectPosition: "center",
             }}
@@ -99,8 +99,8 @@ export async function GET(request: Request) {
       </div>
     ),
     {
-      width: 630,
-      height: 473,
+      width: 800,
+      height: 471,
     },
   );
 }
