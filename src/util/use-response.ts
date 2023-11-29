@@ -23,14 +23,16 @@ function convertEmojiToDataToDataURL(emoji: string): string {
   return element.toDataURL("image/png", 1);
 }
 export const useResponse = (
+  revalidateOnMount: boolean,
   emoji: string,
   name: string,
   style: string,
   strength: number,
+  seed: number,
 ) => {
   const { data, isLoading } = useSWR(
-    [emoji, name, style, strength],
-    async ([base64, name, style, strength]) => {
+    [emoji, name, style, strength, seed],
+    async ([base64, name, style, strength, seed]) => {
       const response = await fetch("/api/run", {
         headers: {
           accept: "image/jpeg",
@@ -44,7 +46,7 @@ export const useResponse = (
           prompt: `cute ${name}, ${style}`,
           guidance_scale: 8,
           lcm_steps: 50,
-          seed: Math.floor(Math.random() * 2159232),
+          seed,
           steps: 4,
           strength,
           width: dimension,
@@ -59,7 +61,7 @@ export const useResponse = (
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-      revalidateOnMount: false,
+      revalidateOnMount,
       refreshWhenOffline: false,
       refreshInterval: 0,
     },

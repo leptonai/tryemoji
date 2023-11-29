@@ -11,7 +11,9 @@
   "dependencies": {
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slider": "^1.1.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@vercel/analytics": "^1.1.1",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "emoji-picker-react": "^4.5.16",
     "lucide-react": "^0.294.0",
@@ -24,6 +26,7 @@
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
+    "@types/lz-string": "^1.5.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
