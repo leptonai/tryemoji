@@ -91,6 +91,8 @@ const exceptEmojis = [
   "bikini",
   "one-piece_swimsuit",
   "sari",
+  "sloth",
+  "x-ray",
 ];
 
 interface EmojiSkin {

@@ -114,10 +114,11 @@ export default function TryEmoji() {
           <div className="flex-0 w-full md:w-80">
             <EmojiSelector
               onSelect={(e) => {
-                console.log(e.id);
+                const prefix =
+                  e.keywords.indexOf("animal") > -1 ? "super cute" : "";
                 const keyword = e.keywords.join(", ");
                 const emoji = e.native;
-                const name = `${e.name}, ${keyword}`;
+                const name = `${prefix} ${e.name}, ${keyword}`;
                 setEmoji({ emoji, name });
               }}
             ></EmojiSelector>
