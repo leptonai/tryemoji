@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.1.2",
+    "@emoji-mart/react": "^1.1.1",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slider": "^1.1.2",
     "@radix-ui/react-toast": "^1.1.5",
@@ -17,8 +19,9 @@
     "@vercel/kv": "^1.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "emoji-picker-react": "^4.5.16",
+    "emoji-mart": "^5.5.2",
     "lucide-react": "^0.294.0",
+    "lz-string": "^1.5.0",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
@@ -26,8 +29,7 @@
     "react-share": "^5.0.2",
     "swr": "^2.2.4",
     "tailwind-merge": "^2.0.0",
-    "use-debounce": "^10.0.0",
-    "lz-string": "^1.5.0"
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@types/lz-string": "^1.5.0",

@@ -44,5 +44,5 @@ npm run dev
 ## Built with
 
 - [Lepton AI](https://github.com/leptonai/leptonai)
-- [Emoji Picker React](https://github.com/ealush/emoji-picker-react)
+- [emoji-mart](https://github.com/missive/emoji-mart)
 - [Real-Time-Latent-Consistency-Model](https://huggingface.co/spaces/radames/Real-Time-Latent-Consistency-Model)

@@ -12,3 +12,15 @@
   display: none !important;
 }
 
+
+em-emoji-picker {
+  height: 512px;
+  width: 320px;
+}
+
+@media (max-width: 768px) {
+  em-emoji-picker {
+    height: 320px;
+    width: 100%;
+  }
+}

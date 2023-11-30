@@ -1,4 +1,6 @@
 "use client";
+import { Dice } from "@/components/dice";
+import { EmojiSelector } from "@/components/emoji-selector";
 import { GithubForkRibbon } from "@/components/github";
 import {
   Select,
@@ -21,21 +23,8 @@ import { usePrevious } from "@/util/use-previous";
 import { useResponse } from "@/util/use-response";
 import { getShareUrl, Option, useShare } from "@/util/use-share";
 import { clsx } from "clsx";
-import { EmojiStyle, Categories, Theme } from "emoji-picker-react";
-import {
-  Check,
-  Dice1,
-  Dice2,
-  Dice3,
-  Dice4,
-  Dice5,
-  Dice6,
-  Download,
-  Share2,
-} from "lucide-react";
-import dynamic from "next/dynamic";
-import { FC, useEffect, useMemo, useState } from "react";
-import { useMediaQuery } from "react-responsive";
+import { Check, Download, Share2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -45,71 +34,6 @@ import {
   XIcon,
 } from "react-share";
 import { setEmojiFavicon } from "@/util/set-emoji-favicon";
-
-const EmojiPicker = dynamic(
-  async () => (await import("emoji-picker-react")).default,
-  {
-    ssr: false,
-  },
-);
-
-const supportCategories = [
-  Categories.CUSTOM,
-  Categories.ANIMALS_NATURE,
-  Categories.FOOD_DRINK,
-  Categories.TRAVEL_PLACES,
-  Categories.ACTIVITIES,
-  Categories.OBJECTS,
-];
-
-function getRandom<T>(arr: T[]): T {
-  if (arr.length === 1) {
-    return arr[0];
-  }
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-const dices = [
-  <Dice1 key="dice-1" />,
-  <Dice2 key="dice-2" />,
-  <Dice3 key="dice-3" />,
-  <Dice4 key="dice-4" />,
-  <Dice5 key="dice-5" />,
-  <Dice6 key="dice-6" />,
-];
-
-const RollableDice: FC = () => {
-  const [click, setClick] = useState(false);
-  const [currentNumber, setCurrentNumber] = useState(3);
-  const rollDice = () => {
-    let rollingTime = 0;
-    setClick(true);
-
-    const rollInterval = setInterval(
-      () => {
-        setCurrentNumber(Math.floor(Math.random() * 6));
-        rollingTime += 100;
-        // Slow down the rolling
-        if (rollingTime >= 1200) {
-          clearInterval(rollInterval);
-          setClick(false);
-        }
-      },
-      100 - rollingTime / 20,
-    );
-  };
-  return (
-    <div
-      className={click ? "animate-[shake_1.2s_ease-in-out]" : ""}
-      onClick={(event) => {
-        event.preventDefault();
-        rollDice();
-      }}
-    >
-      {dices[currentNumber]}
-    </div>
-  );
-};
 
 export default function TryEmoji() {
   const { option: presetOption, hasShare } = useShare();
@@ -121,7 +45,6 @@ export default function TryEmoji() {
   const [preset, setPreset] = useState(
     presetArtStyles.find((p) => p.prompt === presetOption.prompt)!,
   );
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
   const [strength, setStrength] = useState(presetOption.strength);
   const [seed, setSeed] = useState(presetOption.seed);
 
@@ -189,23 +112,14 @@ export default function TryEmoji() {
         </div>
         <div className="flex items-center justify-center flex-col md:flex-row gap-4">
           <div className="flex-0 w-full md:w-80">
-            <EmojiPicker
-              width={"100%"}
-              height={isSmallScreen ? 300 : 512}
-              searchDisabled={isSmallScreen}
-              onEmojiClick={(e) => {
-                const emoji = e.emoji;
-                const name = e.names[e.names.length - 1];
+            <EmojiSelector
+              onSelect={(e) => {
+                const keyword = e.keywords.join(", ");
+                const emoji = e.native;
+                const name = `${e.name}, ${keyword}`;
                 setEmoji({ emoji, name });
               }}
-              skinTonesDisabled
-              emojiStyle={EmojiStyle.NATIVE}
-              theme={Theme.DARK}
-              categories={supportCategories.map((c) => ({
-                name: c,
-                category: c,
-              }))}
-            ></EmojiPicker>
+            ></EmojiSelector>
           </div>
           <div className="flex-1">
             <div className="max-w-[100vw] h-[512px] w-[512px] rounded-lg overflow-hidden bg-zinc-900 relative">
@@ -310,7 +224,7 @@ export default function TryEmoji() {
                         }}
                         className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
                       >
-                        <RollableDice></RollableDice>
+                        <Dice></Dice>
                       </button>
                     </TooltipTrigger>
                     <TooltipContent>
