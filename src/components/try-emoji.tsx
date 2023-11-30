@@ -44,7 +44,6 @@ import {
   TwitterShareButton,
   XIcon,
 } from "react-share";
-import { useThrottledCallback } from "use-debounce";
 import { setEmojiFavicon } from "@/util/set-emoji-favicon";
 
 const EmojiPicker = dynamic(
@@ -55,6 +54,7 @@ const EmojiPicker = dynamic(
 );
 
 const supportCategories = [
+  Categories.CUSTOM,
   Categories.ANIMALS_NATURE,
   Categories.FOOD_DRINK,
   Categories.TRAVEL_PLACES,
@@ -124,7 +124,6 @@ export default function TryEmoji() {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
   const [strength, setStrength] = useState(presetOption.strength);
   const [seed, setSeed] = useState(presetOption.seed);
-  const throttleSetStrength = useThrottledCallback(setStrength, 1000);
 
   const shareOption: Option = useMemo(() => {
     return {
@@ -263,10 +262,10 @@ export default function TryEmoji() {
                     <Slider
                       className="flex-1"
                       defaultValue={[strength]}
-                      onValueChange={(v) => throttleSetStrength(v[0])}
-                      max={0.8}
+                      onValueChange={(v) => setStrength(v[0])}
+                      max={0.7}
                       min={0.5}
-                      step={0.1}
+                      step={0.025}
                     />
                   </TooltipTrigger>
                   <TooltipContent>
@@ -332,6 +331,11 @@ export default function TryEmoji() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="text-xs text-zinc-500 font-sans mt-8 hover:text-zinc-100">
+          <a href="https://lepton.ai" target="_blank">
+            Powered by Lepton AI
+          </a>
         </div>
       </div>
     </TooltipProvider>
