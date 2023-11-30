@@ -255,79 +255,83 @@ export default function TryEmoji() {
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <div className="absolute bottom-2 left-2 right-2 flex gap-2">
-                <div className="text-xl text-zinc-100">AI</div>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Slider
-                      className="flex-1"
-                      defaultValue={[strength]}
-                      onValueChange={(v) => setStrength(v[0])}
-                      max={0.7}
-                      min={0.5}
-                      step={0.025}
-                    />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>AI strength</p>
-                  </TooltipContent>
-                </Tooltip>
-
-                <Select
-                  value={preset.artist}
-                  onValueChange={(value) =>
-                    setPreset(presetArtStyles.find((p) => p.artist === value)!)
-                  }
-                >
+              <div className="absolute bottom-2 left-2 right-2 flex gap-2 flex-wrap">
+                <div className="flex flex-auto gap-2 w-full md:w-auto">
+                  <div className="text-xl text-zinc-100">AI</div>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <SelectTrigger className="flex-0 w-56 border-0 rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">
-                        <SelectValue placeholder="Select a fruit" />
-                      </SelectTrigger>
+                      <Slider
+                        className="flex-1"
+                        defaultValue={[strength]}
+                        onValueChange={(v) => setStrength(v[0])}
+                        max={0.7}
+                        min={0.5}
+                        step={0.025}
+                      />
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Art style</p>
+                      <p>AI strength</p>
                     </TooltipContent>
                   </Tooltip>
+                </div>
+                <div className="flex flex-auto md:flex-grow-0 gap-2 w-full md:w-auto">
+                  <Select
+                    value={preset.artist}
+                    onValueChange={(value) =>
+                      setPreset(
+                        presetArtStyles.find((p) => p.artist === value)!,
+                      )
+                    }
+                  >
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <SelectTrigger className="flex-1 w-56 border-0 rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">
+                          <SelectValue placeholder="Select a fruit" />
+                        </SelectTrigger>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Art style</p>
+                      </TooltipContent>
+                    </Tooltip>
 
-                  <SelectContent>
-                    {presetArtStyles.map((p) => (
-                      <SelectItem key={p.artist} value={p.artist}>
-                        {p.artist}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      onClick={() => {
-                        setPreset(getRandom(presetArtStyles));
-                        setSeed(Math.floor(Math.random() * 2159232));
-                      }}
-                      className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-                    >
-                      <RollableDice></RollableDice>
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Random</p>
-                  </TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <a
-                      href={image}
-                      download
-                      className="flex-0 block rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-                    >
-                      <Download />
-                    </a>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Download</p>
-                  </TooltipContent>
-                </Tooltip>
+                    <SelectContent>
+                      {presetArtStyles.map((p) => (
+                        <SelectItem key={p.artist} value={p.artist}>
+                          {p.artist}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          setSeed(Math.floor(Math.random() * 2159232));
+                        }}
+                        className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                      >
+                        <RollableDice></RollableDice>
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Random</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <a
+                        href={image}
+                        download
+                        className="flex-0 block rounded bg-amber-600 px-0.5 py-0.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                      >
+                        <Download />
+                      </a>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Download</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@ export const presetArtStyles = [
   {
     artist: "Pixar",
     prompt:
-      "in the style of Pixar, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic",
+      "in the style of Pixar, super cute, cartoon-style characters, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic",
   },
   {
     artist: "Minecraft",
