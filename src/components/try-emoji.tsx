@@ -1,7 +1,6 @@
 "use client";
 import { Dice } from "@/components/dice";
 import { EmojiSelector } from "@/components/emoji-selector";
-import { GithubForkRibbon } from "@/components/github";
 import {
   Select,
   SelectContent,
@@ -23,7 +22,7 @@ import { usePrevious } from "@/util/use-previous";
 import { useResponse } from "@/util/use-response";
 import { getShareUrl, Option, useShare } from "@/util/use-share";
 import { clsx } from "clsx";
-import { Check, Download, Share2 } from "lucide-react";
+import { Check, Download, GithubIcon, Share2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import {
   FacebookIcon,
@@ -103,7 +102,6 @@ export default function TryEmoji() {
     <TooltipProvider delayDuration={50}>
       <Toaster />
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-4 md:py-12">
-        <GithubForkRibbon></GithubForkRibbon>
         <div className="text-6xl text-zinc-100">
           {emoji.emoji || "🐤"} tryEmoji{" "}
         </div>
@@ -252,22 +250,33 @@ export default function TryEmoji() {
             </div>
           </div>
         </div>
-        <div className="text-xs text-zinc-500 font-sans mt-8 flex gap-2">
-          <a
-            className="hover:text-zinc-100"
-            href="https://lepton.ai"
-            target="_blank"
-          >
-            Powered by Lepton AI
-          </a>
-          |
-          <a
-            className="hover:text-zinc-100"
-            href="https://github.com/leptonai/tryemoji"
-            target="_blank"
-          >
-            Github
-          </a>
+        <div className="flex flex-col gap-2 mt-8 items-center">
+          <div className="text-xs text-zinc-500 font-sans flex gap-2">
+            <a
+              className="hover:text-zinc-100"
+              href="https://lepton.ai"
+              target="_blank"
+            >
+              Powered by Lepton AI
+            </a>
+          </div>
+          <div className="text-xs text-zinc-500 font-sans flex gap-2">
+            <a
+              className="hover:text-zinc-100 flex gap-2 items-center"
+              href="https://github.com/leptonai/tryemoji"
+              target="_blank"
+            >
+              <GithubIcon size={12}></GithubIcon>Github
+            </a>
+            |
+            <a
+              className="hover:text-zinc-100 flex gap-2 items-center"
+              href="https://huggingface.co/spaces/leptonai/tryemoji"
+              target="_blank"
+            >
+              Hugging Face
+            </a>
+          </div>
         </div>
       </div>
     </TooltipProvider>
