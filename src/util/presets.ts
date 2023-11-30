@@ -1,5 +1,20 @@
 export const presetArtStyles = [
   {
+    artist: "Pixar",
+    prompt:
+      "in the style of Pixar, 4k, 8k, unreal engine, octane render photorealistic by cosmicwonder, hdr, photography by cosmicwonder, high definition, symmetrical face, volumetric lighting, dusty haze, photo, octane render, 24mm, 4k, 24mm, DSLR, high quality, 60 fps, ultra realistic",
+  },
+  {
+    artist: "Minecraft",
+    prompt:
+      "in the style of Minecraft Character, minecraft, ultra hd, realistic, vivid colors, highly detailed, UHD drawing, pen and ink, perfect composition",
+  },
+  {
+    artist: "8 Bit pixel",
+    prompt:
+      "pixel style, pixel style, 8 bit pixel art, golden ratio, fake detail, trending pixiv fanbox, acrylic palette knife, style of makoto shinkai studio ghibli genshin impact james gilleard greg rutkowski chiho aoshima",
+  },
+  {
     artist: "Vincent van Gogh",
     prompt:
       "in the style of Vincent van Gogh, with bold, expressive brush strokes and vibrant colors",
@@ -15,29 +30,9 @@ export const presetArtStyles = [
       "in the style of Salvador Dalí, with dream-like, bizarre elements and melting clocks",
   },
   {
-    artist: "Pierre-Auguste Renoir",
-    prompt:
-      "in the style of Pierre-Auguste Renoir, featuring soft, warm colors and fluid brushwork",
-  },
-  {
     artist: "Pablo Picasso",
     prompt:
       "in the style of Pablo Picasso's Cubism, with geometric shapes and multiple perspectives merged into one image.",
-  },
-  {
-    artist: "Caravaggio",
-    prompt:
-      "in the style of Caravaggio, emphasizing dramatic lighting and realism",
-  },
-  {
-    artist: "Rembrandt van Rijn",
-    prompt:
-      "in the style of Rembrandt, focusing on deep, rich colors and dramatic contrasts between light and shadow.",
-  },
-  {
-    artist: "Paul Gauguin",
-    prompt:
-      "in the style of Paul Gauguin, with bold colors and strong outlines",
   },
   {
     artist: "Edvard Munch",

@@ -18,9 +18,9 @@ function convertEmojiToDataToDataURL(emoji: string): string {
   ctx.fillRect(0, 0, element.width, element.height);
   ctx.textAlign = `center`;
   ctx.textBaseline = `middle`;
-  ctx.font = `${dimension - 24}px serf`;
+  ctx.font = `${dimension - 32}px serf`;
   ctx.fillText(emoji, 256, 256);
-  return element.toDataURL("image/png", 1);
+  return element.toDataURL("image/jpeg", 0.5);
 }
 export const useResponse = (
   revalidateOnMount: boolean,
