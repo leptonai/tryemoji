@@ -105,7 +105,7 @@ export default function TryEmoji() {
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-12">
         <GithubForkRibbon></GithubForkRibbon>
         <div className="text-6xl text-zinc-100">
-          {emoji.emoji || "🐱"} tryEmoji{" "}
+          {emoji.emoji || "🐤"} tryEmoji{" "}
         </div>
         <div className="text-xl text-zinc-100">
           Turn emoji into amazing artwork via AI
@@ -114,6 +114,7 @@ export default function TryEmoji() {
           <div className="flex-0 w-full md:w-80">
             <EmojiSelector
               onSelect={(e) => {
+                console.log(e.id);
                 const keyword = e.keywords.join(", ");
                 const emoji = e.native;
                 const name = `${e.name}, ${keyword}`;

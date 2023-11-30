@@ -17,9 +17,15 @@ function convertEmojiToDataToDataURL(emoji: string): string {
   ctx.fillStyle = "rgb(24 24 27)";
   ctx.fillRect(0, 0, element.width, element.height);
   ctx.textAlign = `center`;
-  ctx.textBaseline = `middle`;
   ctx.font = `${dimension - 32}px serf`;
-  ctx.fillText(emoji, 256, 256);
+  const textMetrics = ctx.measureText(emoji);
+
+  const textHeight =
+    textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+  const y =
+    dimension / 2 + (textMetrics.actualBoundingBoxAscent - textHeight / 2);
+
+  ctx.fillText(emoji, dimension / 2, y);
   return element.toDataURL("image/jpeg", 0.5);
 }
 export const useResponse = (
