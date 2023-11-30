@@ -102,7 +102,7 @@ export default function TryEmoji() {
   return (
     <TooltipProvider delayDuration={50}>
       <Toaster />
-      <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-12">
+      <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-4 md:py-12">
         <GithubForkRibbon></GithubForkRibbon>
         <div className="text-6xl text-zinc-100">
           {emoji.emoji || "🐤"} tryEmoji{" "}
@@ -110,7 +110,7 @@ export default function TryEmoji() {
         <div className="text-xl text-zinc-100">
           Turn emoji into amazing artwork via AI
         </div>
-        <div className="flex items-center justify-center flex-col md:flex-row gap-4">
+        <div className="flex items-center justify-center flex-col md:flex-row gap-2 md:gap-4">
           <div className="flex-0 w-full md:w-80">
             <EmojiSelector
               onSelect={(e) => {
@@ -124,14 +124,14 @@ export default function TryEmoji() {
             ></EmojiSelector>
           </div>
           <div className="flex-1">
-            <div className="max-w-[100vw] h-[512px] w-[512px] rounded-lg overflow-hidden bg-zinc-900 relative">
+            <div className="max-w-[100vw] h-auto md:h-[512px] w-[512px] rounded-lg overflow-hidden relative">
               <img src={mergedImage} className="h-full w-full object-contain" />
               <div
                 className={clsx("transition absolute inset-0", {
                   "backdrop-blur-xl": loading,
                 })}
               ></div>
-              <div className="absolute top-2 right-2 flex gap-2 items-center">
+              <div className="hidden absolute top-2 right-2 md:flex gap-2 items-center">
                 <FacebookShareButton
                   beforeOnClick={() => warmOrg}
                   url={shareUrl}
@@ -252,9 +252,21 @@ export default function TryEmoji() {
             </div>
           </div>
         </div>
-        <div className="text-xs text-zinc-500 font-sans mt-8 hover:text-zinc-100">
-          <a href="https://lepton.ai" target="_blank">
+        <div className="text-xs text-zinc-500 font-sans mt-8 flex gap-2">
+          <a
+            className="hover:text-zinc-100"
+            href="https://lepton.ai"
+            target="_blank"
+          >
             Powered by Lepton AI
+          </a>
+          |
+          <a
+            className="hover:text-zinc-100"
+            href="https://github.com/leptonai/tryemoji"
+            target="_blank"
+          >
+            Github
           </a>
         </div>
       </div>

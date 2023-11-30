@@ -20,7 +20,8 @@ em-emoji-picker {
 
 @media (max-width: 768px) {
   em-emoji-picker {
-    height: 320px;
+    height: 100px;
+    min-height: 100px;
     width: 100%;
   }
 }

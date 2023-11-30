@@ -1,6 +1,7 @@
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import { FC } from "react";
+import { useMediaQuery } from "react-responsive";
 
 const emojis = (data as unknown as any).emojis as { [key: string]: EmojiSkin };
 export interface EmojiData {
@@ -238,6 +239,8 @@ const custom = [
 export const EmojiSelector: FC<{ onSelect: (e: EmojiData) => void }> = ({
   onSelect,
 }) => {
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
+
   return (
     <Picker
       exceptEmojis={exceptEmojis}
@@ -254,6 +257,9 @@ export const EmojiSelector: FC<{ onSelect: (e: EmojiData) => void }> = ({
       ]}
       theme="dark"
       categoryIcons={categoryIcons}
+      searchPosition={isSmallScreen ? "none" : "bottom"}
+      navPosition={isSmallScreen ? "none" : "top"}
+      previewPosition={isSmallScreen ? "none" : "bottom"}
       data={data}
       onEmojiSelect={onSelect}
     />
