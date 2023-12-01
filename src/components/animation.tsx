@@ -24,7 +24,7 @@ export const Animation: FC<{
             ? config.min
             : prev + config.step;
         });
-      }, 100);
+      }, 50);
     }
 
     return () => {
@@ -37,7 +37,7 @@ export const Animation: FC<{
     <div
       onClick={() => setPlaying((prev) => !prev)}
       className={clsx(
-        "transition duration-75 delay-0 absolute inset-0 flex items-center justify-center cursor-pointer text-zinc-100/5 hover:text-zinc-100/60",
+        "transition duration-75 delay-0 absolute inset-0 flex items-center justify-center cursor-pointer text-zinc-100/0 hover:text-zinc-100/60",
         {
           "backdrop-blur-xl": loading && !playing,
         },

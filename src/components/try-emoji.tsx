@@ -2,6 +2,7 @@
 import { Animation, AnimationConfig } from "@/components/animation";
 import { Dice } from "@/components/dice";
 import { EmojiSelector } from "@/components/emoji-selector";
+import { GithubForkRibbon } from "@/components/github";
 import {
   Select,
   SelectContent,
@@ -36,8 +37,8 @@ import {
 } from "react-share";
 
 const animationConfig: AnimationConfig = {
-  step: 0.025,
-  min: 0.3,
+  step: 0.01,
+  min: 0.4,
   max: 0.7,
 };
 
@@ -109,9 +110,10 @@ export default function TryEmoji() {
   return (
     <TooltipProvider delayDuration={50}>
       <Toaster />
+      <GithubForkRibbon></GithubForkRibbon>
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-4 md:py-12">
         <div className="text-6xl text-zinc-100">
-          {emoji.emoji || "🐥"} tryEmoji{" "}
+          {emoji.emoji || "🐹"} tryEmoji{" "}
         </div>
         <div className="text-xl text-zinc-100">
           Turn emoji into amazing artwork via AI
