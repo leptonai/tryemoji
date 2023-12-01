@@ -1,4 +1,5 @@
 "use client";
+import { Animation, AnimationConfig } from "@/components/animation";
 import { Dice } from "@/components/dice";
 import { EmojiSelector } from "@/components/emoji-selector";
 import {
@@ -21,7 +22,6 @@ import { presetImage, presetArtStyles } from "@/util/presets";
 import { usePrevious } from "@/util/use-previous";
 import { useResponse } from "@/util/use-response";
 import { getShareUrl, Option, useShare } from "@/util/use-share";
-import { clsx } from "clsx";
 import { Check, Download, GithubIcon, Share2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
@@ -34,6 +34,12 @@ import {
   TwitterShareButton,
   XIcon,
 } from "react-share";
+
+const animationConfig: AnimationConfig = {
+  step: 0.025,
+  min: 0.3,
+  max: 0.7,
+};
 
 export default function TryEmoji() {
   const { option: presetOption, hasShare } = useShare();
@@ -125,26 +131,23 @@ export default function TryEmoji() {
           <div className="flex-1">
             <div className="max-w-[100vw] h-auto md:h-[512px] w-[512px] rounded-lg relative">
               <img src={mergedImage} className="h-full w-full object-contain" />
-              <div
-                className={clsx(
-                  "transition duration-75 delay-0 absolute inset-0 pointer-events-none",
-                  {
-                    "backdrop-blur-xl": loading,
-                  },
-                )}
-              ></div>
-              <div className="absolute -bottom-10 md:bottom-2 left-2 right-2 flex gap-2 flex-wrap">
+              <Animation
+                config={animationConfig}
+                loading={loading}
+                setStrength={(v) => setStrength(v)}
+              ></Animation>
+              <div className="absolute -bottom-10 md:bottom-2 left-2 right-2 flex gap-2 z-50 flex-wrap">
                 <div className="flex flex-auto gap-2 w-full md:w-auto">
                   <div className="text-xl text-zinc-100">AI</div>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Slider
                         className="flex-1"
-                        defaultValue={[strength]}
+                        value={[strength]}
                         onValueChange={(v) => setStrength(v[0])}
-                        max={0.7}
-                        min={0.1}
-                        step={0.05}
+                        max={animationConfig.max}
+                        min={animationConfig.min}
+                        step={animationConfig.step}
                       />
                     </TooltipTrigger>
                     <TooltipContent>
