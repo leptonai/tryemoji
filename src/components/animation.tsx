@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { PauseCircle, PlayCircle } from "lucide-react";
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect } from "react";
 export interface AnimationConfig {
   step: number;
   min: number;
@@ -10,9 +10,10 @@ export interface AnimationConfig {
 export const Animation: FC<{
   config: AnimationConfig;
   loading: boolean;
+  playing: boolean;
+  setPlaying: Dispatch<SetStateAction<boolean>>;
   setStrength: Dispatch<SetStateAction<number>>;
-}> = ({ config, loading, setStrength }) => {
-  const [playing, setPlaying] = useState(false);
+}> = ({ config, loading, setStrength, playing, setPlaying }) => {
   useEffect(() => {
     let interval: NodeJS.Timeout;
 

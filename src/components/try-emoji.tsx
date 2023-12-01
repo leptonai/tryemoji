@@ -57,6 +57,7 @@ const warmOrg = (image: string, shareKey: string): Promise<void> => {
 
 export default function TryEmoji() {
   const { option: presetOption, hasShare } = useShare();
+  const [playing, setPlaying] = useState(false);
   const { toast } = useToast();
   const [emoji, setEmoji] = useState({
     emoji: presetOption.emoji,
@@ -119,6 +120,7 @@ export default function TryEmoji() {
           <div className="flex-0 w-full md:w-80">
             <EmojiSelector
               onSelect={(e) => {
+                setPlaying(false);
                 const prefix =
                   e.keywords.indexOf("animal") > -1 ? "super cute" : "";
                 const keyword = e.keywords.join(", ");
@@ -132,6 +134,8 @@ export default function TryEmoji() {
             <div className="max-w-[100vw] h-auto md:h-[512px] w-[512px] rounded-lg relative">
               <img src={mergedImage} className="h-full w-full object-contain" />
               <Animation
+                playing={playing}
+                setPlaying={setPlaying}
                 config={animationConfig}
                 loading={loading}
                 setStrength={(v) => setStrength(v)}
