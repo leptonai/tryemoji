@@ -146,6 +146,7 @@ export default function TryEmoji() {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Slider
+                        disabled={playing}
                         className="flex-1"
                         value={[strength]}
                         onValueChange={(v) => setStrength(v[0])}

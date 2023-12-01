@@ -25,8 +25,6 @@ export const Animation: FC<{
             : prev + config.step;
         });
       }, 100);
-    } else {
-      setStrength(config.max);
     }
 
     return () => {
