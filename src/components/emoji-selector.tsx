@@ -143,6 +143,7 @@ const custom = [
       emojis["sunrise"],
       emojis["city_sunset"],
       emojis["city_sunrise"],
+      emojis["hugging_face"],
     ],
   },
   {
