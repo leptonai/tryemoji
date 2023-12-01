@@ -41,6 +41,20 @@ const animationConfig: AnimationConfig = {
   max: 0.7,
 };
 
+const warmOrg = (image: string, shareKey: string): Promise<void> => {
+  if (image) {
+    return fetch("/api/share", {
+      method: "POST",
+      body: JSON.stringify({
+        image: image,
+        key: shareKey,
+      }),
+    }).then();
+  } else {
+    return new Promise((resolve) => resolve());
+  }
+};
+
 export default function TryEmoji() {
   const { option: presetOption, hasShare } = useShare();
   const { toast } = useToast();
@@ -90,20 +104,6 @@ export default function TryEmoji() {
   const shareUrl = useMemo(() => {
     return `https://tryemoji.com?share=${shareKey}`;
   }, [shareKey]);
-
-  const warmOrg: Promise<void> = useMemo(() => {
-    if (image) {
-      return fetch("/api/share", {
-        method: "POST",
-        body: JSON.stringify({
-          image: image,
-          key: shareKey,
-        }),
-      }).then();
-    } else {
-      return new Promise((resolve) => resolve());
-    }
-  }, [image, shareKey]);
 
   return (
     <TooltipProvider delayDuration={50}>
@@ -216,7 +216,7 @@ export default function TryEmoji() {
                     <TooltipTrigger asChild>
                       <button
                         onClick={() => {
-                          warmOrg.then(() => {
+                          warmOrg(image, shareKey).then(() => {
                             navigator.clipboard.writeText(shareUrl).then(() => {
                               toast({
                                 description: (
@@ -245,13 +245,22 @@ export default function TryEmoji() {
         </div>
         <div className="flex flex-col gap-2 mt-8 items-center">
           <div className="flex items-center gap-2 mb-2">
-            <FacebookShareButton beforeOnClick={() => warmOrg} url={shareUrl}>
+            <FacebookShareButton
+              beforeOnClick={() => warmOrg(image, shareKey)}
+              url={shareUrl}
+            >
               <FacebookIcon className="rounded" size={24}></FacebookIcon>
             </FacebookShareButton>
-            <TwitterShareButton onClick={() => warmOrg} url={shareUrl}>
+            <TwitterShareButton
+              onClick={() => warmOrg(image, shareKey)}
+              url={shareUrl}
+            >
               <XIcon className="rounded" size={24} />
             </TwitterShareButton>
-            <LinkedinShareButton onClick={() => warmOrg} url={shareUrl}>
+            <LinkedinShareButton
+              onClick={() => warmOrg(image, shareKey)}
+              url={shareUrl}
+            >
               <LinkedinIcon className="rounded" size={24} />
             </LinkedinShareButton>
           </div>
