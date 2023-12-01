@@ -24,6 +24,8 @@ import { getShareUrl, Option, useShare } from "@/util/use-share";
 import { clsx } from "clsx";
 import { Check, Download, GithubIcon, Share2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+
+import { setEmojiFavicon } from "@/util/set-emoji-favicon";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -32,7 +34,6 @@ import {
   TwitterShareButton,
   XIcon,
 } from "react-share";
-import { setEmojiFavicon } from "@/util/set-emoji-favicon";
 
 export default function TryEmoji() {
   const { option: presetOption, hasShare } = useShare();
@@ -103,7 +104,7 @@ export default function TryEmoji() {
       <Toaster />
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-4 md:py-12">
         <div className="text-6xl text-zinc-100">
-          {emoji.emoji || "🐤"} tryEmoji{" "}
+          {emoji.emoji || "🐥"} tryEmoji{" "}
         </div>
         <div className="text-xl text-zinc-100">
           Turn emoji into amazing artwork via AI
@@ -122,54 +123,17 @@ export default function TryEmoji() {
             ></EmojiSelector>
           </div>
           <div className="flex-1">
-            <div className="max-w-[100vw] h-auto md:h-[512px] w-[512px] rounded-lg overflow-hidden relative">
+            <div className="max-w-[100vw] h-auto md:h-[512px] w-[512px] rounded-lg relative">
               <img src={mergedImage} className="h-full w-full object-contain" />
               <div
-                className={clsx("transition absolute inset-0", {
-                  "backdrop-blur-xl": loading,
-                })}
+                className={clsx(
+                  "transition duration-75 delay-0 absolute inset-0 pointer-events-none",
+                  {
+                    "backdrop-blur-xl": loading,
+                  },
+                )}
               ></div>
-              <div className="hidden absolute top-2 right-2 md:flex gap-2 items-center">
-                <FacebookShareButton
-                  beforeOnClick={() => warmOrg}
-                  url={shareUrl}
-                >
-                  <FacebookIcon className="rounded" size={24}></FacebookIcon>
-                </FacebookShareButton>
-                <TwitterShareButton onClick={() => warmOrg} url={shareUrl}>
-                  <XIcon className="rounded" size={24} />
-                </TwitterShareButton>
-                <LinkedinShareButton onClick={() => warmOrg} url={shareUrl}>
-                  <LinkedinIcon className="rounded" size={24} />
-                </LinkedinShareButton>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      onClick={() => {
-                        warmOrg.then(() => {
-                          navigator.clipboard.writeText(shareUrl).then(() => {
-                            toast({
-                              description: (
-                                <div className="flex gap-2 text-sm items-center">
-                                  <Check className="text-green-500"></Check>
-                                  Copied, paste to share
-                                </div>
-                              ),
-                            });
-                          });
-                        });
-                      }}
-                      className="flex-0 rounded bg-amber-600 w-6 flex items-center justify-center h-6 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-                    >
-                      <Share2 size={16}></Share2>
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Share</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-              <div className="absolute bottom-2 left-2 right-2 flex gap-2 flex-wrap">
+              <div className="absolute -bottom-10 md:bottom-2 left-2 right-2 flex gap-2 flex-wrap">
                 <div className="flex flex-auto gap-2 w-full md:w-auto">
                   <div className="text-xl text-zinc-100">AI</div>
                   <Tooltip>
@@ -179,8 +143,8 @@ export default function TryEmoji() {
                         defaultValue={[strength]}
                         onValueChange={(v) => setStrength(v[0])}
                         max={0.7}
-                        min={0.5}
-                        step={0.025}
+                        min={0.1}
+                        step={0.05}
                       />
                     </TooltipTrigger>
                     <TooltipContent>
@@ -199,7 +163,7 @@ export default function TryEmoji() {
                   >
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <SelectTrigger className="flex-1 w-56 border-0 rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">
+                        <SelectTrigger className="flex-1 w-44 border-0 rounded bg-amber-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">
                           <SelectValue placeholder="Select a fruit" />
                         </SelectTrigger>
                       </TooltipTrigger>
@@ -245,12 +209,49 @@ export default function TryEmoji() {
                       <p>Download</p>
                     </TooltipContent>
                   </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          warmOrg.then(() => {
+                            navigator.clipboard.writeText(shareUrl).then(() => {
+                              toast({
+                                description: (
+                                  <div className="flex gap-2 text-sm items-center">
+                                    <Check className="text-green-500"></Check>
+                                    Copied, paste to share
+                                  </div>
+                                ),
+                              });
+                            });
+                          });
+                        }}
+                        className="flex-0 rounded bg-amber-600 px-0.5 py-0.5 flex items-center justify-center text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                      >
+                        <Share2></Share2>
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Share</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="flex flex-col gap-2 mt-8 items-center">
+          <div className="flex items-center gap-2 mb-2">
+            <FacebookShareButton beforeOnClick={() => warmOrg} url={shareUrl}>
+              <FacebookIcon className="rounded" size={24}></FacebookIcon>
+            </FacebookShareButton>
+            <TwitterShareButton onClick={() => warmOrg} url={shareUrl}>
+              <XIcon className="rounded" size={24} />
+            </TwitterShareButton>
+            <LinkedinShareButton onClick={() => warmOrg} url={shareUrl}>
+              <LinkedinIcon className="rounded" size={24} />
+            </LinkedinShareButton>
+          </div>
           <div className="text-xs text-zinc-500 font-sans flex gap-2">
             <a
               className="hover:text-zinc-100"

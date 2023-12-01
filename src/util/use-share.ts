@@ -14,10 +14,10 @@ export interface Option {
 }
 
 const fallbackOptions: Option = {
-  emoji: "🐤",
-  name: "cat",
+  emoji: "🐥",
+  name: "baby chick",
   prompt: presetArtStyles[0].prompt,
-  seed: 2159232,
+  seed: Math.floor(Math.random() * 2159232),
   strength: 0.7,
 };
 
