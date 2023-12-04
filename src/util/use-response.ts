@@ -1,5 +1,8 @@
 import useSWR from "swr";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8080";
+const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN || "";
+
 const dimension = 512;
 function blobToBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, _) => {
@@ -38,12 +41,17 @@ export const useResponse = (
 ) => {
   const { data, isLoading } = useSWR(
     [emoji, name, style, strength, seed],
-    async ([base64, name, style, strength, seed]) => {
-      const response = await fetch("/api/run", {
-        headers: {
-          accept: "image/jpeg",
-          "content-type": "application/json",
-        },
+    async ([emoji, name, style, strength, seed]) => {
+      const url = new URL("/run", API_URL);
+      const headers = new Headers();
+
+      headers.set("Accept", `image/jpeg`);
+      headers.set("Content-Type", `application/json`);
+      if (API_TOKEN) {
+        headers.set("Authorization", `Bearer ${API_TOKEN}`);
+      }
+      const response = await fetch(url, {
+        headers,
         body: JSON.stringify({
           input_image: convertEmojiToDataToDataURL(emoji).replace(
             /^data:image\/(png|jpeg);base64,/,
