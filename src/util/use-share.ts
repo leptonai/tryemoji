@@ -18,7 +18,7 @@ const fallbackOptions: Option = {
   name: "baby chick",
   prompt: presetArtStyles[0].prompt,
   seed: Math.floor(Math.random() * 2159232),
-  strength: 0.7,
+  strength: 700,
 };
 
 export const shareString2Json = (shareString: string): Option => {

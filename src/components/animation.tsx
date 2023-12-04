@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { PauseCircle, PlayCircle } from "lucide-react";
+import { Loader, PauseCircle, PlayCircle } from "lucide-react";
 import { Dispatch, FC, SetStateAction, useEffect } from "react";
 export interface AnimationConfig {
   step: number;
@@ -38,11 +38,14 @@ export const Animation: FC<{
       onClick={() => setPlaying((prev) => !prev)}
       className={clsx(
         "transition duration-75 delay-0 absolute inset-0 flex items-center justify-center cursor-pointer text-zinc-100/0 hover:text-zinc-100/60",
-        {
-          "backdrop-blur-xl": loading && !playing,
-        },
       )}
     >
+      <Loader
+        className={clsx(
+          "animate-spin w-4 h-4 text-white absolute z-10 top-2 right-2 transition-opacity duration-75 delay-200",
+          loading ? "opacity-60" : "opacity-0",
+        )}
+      />
       {playing ? (
         <PauseCircle size={128}></PauseCircle>
       ) : (
