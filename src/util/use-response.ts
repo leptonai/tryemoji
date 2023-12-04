@@ -62,7 +62,7 @@ export const useResponse = (
           lcm_steps: 50,
           seed,
           steps: 4,
-          strength,
+          strength: strength / 1000,
           width: dimension,
           height: dimension,
         }),

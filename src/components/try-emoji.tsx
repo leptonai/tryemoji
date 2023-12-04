@@ -37,9 +37,9 @@ import {
 } from "react-share";
 
 const animationConfig: AnimationConfig = {
-  step: 0.01,
-  min: 0.4,
-  max: 0.7,
+  step: 10,
+  min: 400,
+  max: 700,
 };
 
 const warmOrg = (image: string, shareKey: string): Promise<void> => {
