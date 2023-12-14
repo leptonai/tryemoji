@@ -31,6 +31,9 @@ function convertEmojiToDataToDataURL(emoji: string): string {
   ctx.fillText(emoji, dimension / 2, y);
   return element.toDataURL("image/jpeg", 0.5);
 }
+
+const promptCache = new Map<string, string>();
+
 export const useResponse = (
   revalidateOnMount: boolean,
   emoji: string,
@@ -44,12 +47,33 @@ export const useResponse = (
     async ([emoji, name, style, strength, seed]) => {
       const url = new URL("/run", API_URL);
       const headers = new Headers();
-
       headers.set("Accept", `image/jpeg`);
       headers.set("Content-Type", `application/json`);
       if (API_TOKEN) {
         headers.set("Authorization", `Bearer ${API_TOKEN}`);
       }
+      let perfectPrompt = "";
+      const promptKey = `emoji ${emoji}, ${name}, ${style}`;
+      if (promptCache.has(promptKey)) {
+        perfectPrompt = promptCache.get(promptKey)!;
+      } else {
+        const searchParams = new URLSearchParams();
+        searchParams.set("prompt", `${name}, ${emoji}, ${style}`);
+        const promptResponse = await fetch(
+          `/api/perfect-prompt?${searchParams.toString()}`,
+          {
+            method: "GET",
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        );
+        perfectPrompt = (
+          await promptResponse.json()
+        )?.choices?.[0]?.text?.replace("[START]", "");
+        promptCache.set(promptKey, perfectPrompt);
+      }
+
       const response = await fetch(url, {
         headers,
         body: JSON.stringify({
@@ -57,7 +81,7 @@ export const useResponse = (
             /^data:image\/(png|jpeg);base64,/,
             "",
           ),
-          prompt: `${name}, emoji ${emoji}, ${style}`,
+          prompt: perfectPrompt,
           guidance_scale: 8,
           lcm_steps: 50,
           seed,
