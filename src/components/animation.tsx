@@ -35,9 +35,8 @@ export const Animation: FC<{
   }, [config.max, config.min, config.step, playing, setStrength]);
   return (
     <div
-      onClick={() => setPlaying((prev) => !prev)}
       className={clsx(
-        "transition duration-75 delay-0 absolute inset-0 flex items-center justify-center cursor-pointer text-zinc-100/0 hover:text-zinc-100/60",
+        "transition duration-75 delay-0 absolute inset-0 flex items-center justify-center text-zinc-100/0 hover:text-zinc-100/60",
       )}
     >
       <Loader
@@ -46,11 +45,16 @@ export const Animation: FC<{
           loading ? "opacity-60" : "opacity-0",
         )}
       />
-      {playing ? (
-        <PauseCircle size={128}></PauseCircle>
-      ) : (
-        <PlayCircle size={128}></PlayCircle>
-      )}
+      <div
+        onClick={() => setPlaying((prev) => !prev)}
+        className="cursor-pointer"
+      >
+        {playing ? (
+          <PauseCircle size={128}></PauseCircle>
+        ) : (
+          <PlayCircle size={128}></PlayCircle>
+        )}
+      </div>
     </div>
   );
 };

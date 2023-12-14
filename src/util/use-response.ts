@@ -57,7 +57,7 @@ export const useResponse = (
             /^data:image\/(png|jpeg);base64,/,
             "",
           ),
-          prompt: `${name}, emoji ${emoji}, ${style}`,
+          prompt: `emoji ${emoji}, ${name}, ${style}`,
           guidance_scale: 8,
           lcm_steps: 50,
           seed,
