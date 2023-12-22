@@ -115,6 +115,10 @@ const custom = [
     id: "recommend",
     name: "Recommend",
     emojis: [
+      emojis["santa"],
+      emojis["christmas_tree"],
+      emojis["gift"],
+      emojis["deer"],
       emojis["baby_chick"],
       emojis["hatched_chick"],
       emojis["dog"],

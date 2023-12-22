@@ -113,7 +113,7 @@ export default function TryEmoji() {
       <GithubForkRibbon></GithubForkRibbon>
       <div className="min-h-screen flex flex-col gap-4 bg-zinc-950 items-center justify-center py-4 md:py-12">
         <div className="text-6xl text-zinc-100">
-          {emoji.emoji || "🐹"} tryEmoji{" "}
+          {emoji.emoji || "🎅"} tryEmoji{" "}
         </div>
         <div className="text-xl text-zinc-100">
           Turn emoji into amazing artwork via AI

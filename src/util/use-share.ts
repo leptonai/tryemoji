@@ -14,8 +14,8 @@ export interface Option {
 }
 
 const fallbackOptions: Option = {
-  emoji: "🐹",
-  name: "baby chick",
+  emoji: "🎅",
+  name: "santa",
   prompt: presetArtStyles[0].prompt,
   seed: Math.floor(Math.random() * 2159232),
   strength: 700,
