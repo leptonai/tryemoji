@@ -115,8 +115,9 @@ export default function TryEmoji() {
         <div className="text-6xl text-zinc-100">
           {emoji.emoji || "🎅"} tryEmoji{" "}
         </div>
-        <div className="text-xl text-zinc-100">
-          Turn emoji into amazing artwork via AI
+        <div className="text-white text-center">
+          Service Discontinued: To continue using this service, please set it up
+          using the open-source project.
         </div>
         <div className="flex items-center justify-center flex-col md:flex-row gap-2 md:gap-4">
           <div className="flex-0 w-full md:w-80">
